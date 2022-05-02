@@ -1,47 +1,44 @@
-const testButtonFunction=()=>{
-  alert('Thank you for clicking')
+
+const cardList = [
+    {
+        title: "Kitten 2",
+        image: "images/kitten-2.jpg",
+        link: "About Kitten 2",
+        desciption: "Demo desciption about kitten 2"
+    },
+    {
+        title: "Kitten 3",
+        image: "images/kitten-3.jpg",
+        link: "About Kitten 3",
+        desciption: "Demo desciption about kitten 3"
+    },
+    {
+         title: "Kitten 4",
+        image: "images/kitten-3.jpg",
+        link: "About Kitten 3",
+        desciption: "Hey"
+    }
+]
+const clickMe = () => {
+    alert("Thanks for clicking me. Hope you have a nice day!")
 }
-var msg1= 0 ;
 
-// connect to the socket
+const submitForm = () => {
+    let formData = {};
+    formData.first_name = $('#first_name').val();
+    formData.last_name = $('#last_name').val();
+    formData.password = $('#password').val();
+    formData.email = $('#email').val();
 
-let socket = io();
-
-
-socket.on('number', (msg) => {
-    console.log('Random number: ' + msg);
- 
-     addCardsnew(cardList,msg);
-
-    $('#socket_output').html('Random number: ' + msg);
-})
-
-console.log('test')
-$(document).ready(function(){
-  console.log('Ready')
-
-  //bind the button
-  $('#testButton').click(testButtonFunction)
-
-  //test get call
-  $.get('/test?user_name="Fantastic User"',(result)=>{
-    console.log(result)
-  })
+    console.log("Form Data Submitted: ", formData);
+}
 
 
-})
 
-const addCardsnew = (items,value) => {
 
-var i=0;
-
+const addCards = (items) => {
     items.forEach(item => {
-
-if(i==value)
-{
-  console.log("number:" +i);
         let itemToAppend = '<div class="col s4 center-align">'+
-
 
 
 
@@ -53,13 +50,8 @@ if(i==value)
         '<p class="card-text grey-text text-darken-4">'+item.desciption+'</p>'+
       '</div></div></div>';
       $("#card-section").append(itemToAppend)
-}
-
-      i++;
     });
 }
-
-
 
 
 
@@ -69,8 +61,6 @@ $(document).ready(function(){
     $('#formSubmit').click(()=>{
         submitForm();
     })
-    
-   
+    addCards(cardList);
     $('.modal').modal();
   });
-
